@@ -1,0 +1,14 @@
+services:
+  net:
+    image: alpine:latest
+    command: /bin/sh -c "tail -f /dev/null"
+  dev-container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /bin/sh -c "tail -f /dev/null"
+    volumes:
+      - ..:/workspace:cached
+      - $HOME/.ssh:/home/user/.ssh
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+    network_mode: service:net
